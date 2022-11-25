@@ -28,12 +28,11 @@
     <!-- /HERO -->
 
     <!-- CONTACT -->
-    <section>
+    <section class="bg-light py-1" id="contact">
         <div class="container mt-5 mb-5 w-50">
-            <h5 class="mb-4 text-center">Contact Us</h5>
-
+            <h2 class="mb-4 text-center">Contact Us</h2>
             <form action="https://formspree.io/f/xlevkerw" method="POST">
-                <div class="row">
+                <class="row">
                     <div class="col mb-3">
                         <a>First Name <span style="color:red;">*</span><br></a>
                         <input type="text" class="form-control" name="firstname">
@@ -48,7 +47,7 @@
                         <input type="text" class="form-control" name="email">
                     </div>
                     <div class="form-group col mb-3 col-5">
-                        <label>What is it regarding? <span style="color:red;">*</span><br></label>
+                        <label>Regarding? <span style="color:red;">*</span><br></label>
                         <select class="form-control">
                             <option value="">---</option>
                             <option value="Donation Pickup">Donation Pickup</option>
@@ -57,11 +56,11 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-
-                    <button type="submit" class="btn">Submit</button>
-                </div>
+                    <div class="col-md-12 d-grid">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
             </form>
-        </div> 
+        </div>
     </section>
     <!-- /CONTACT -->
 
