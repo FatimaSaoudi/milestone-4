@@ -1,0 +1,52 @@
+/*Hardcoded styles*/
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap");
+
+/*CSS variables - changed the default bootstraps properties*/
+:root {
+    --primary: #0d6efd;
+    --dark: #21252f;
+    --body: #888;
+    --white: #ffffff;
+    --box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+/*hardcoded body requirements*/
+body {
+    font-family: "Sora", sans-serif;
+    line-height: 1.7;
+    color: var(--body);
+}
+
+/*heading texts to stay the same for consistent sizes or color*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-4 {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+/*anchor links tags style*/
+a {
+    color: var(--dark);
+    text-decoration: none;
+}
+
+/*images*/
+img {
+    width: 100%;
+}
+
+/*Navbar*/
+
+
+/*Body Sections*/
+
+
+/*Contact*/
+
+
+/*Footer*/
