@@ -1,6 +1,6 @@
+import { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { UserContext } from './UserContext.js';
-import { useState, useContext } from 'react';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import { Navigate } from 'react-router-dom'
 
 
 function LoginScreen() {
@@ -17,7 +16,7 @@ function LoginScreen() {
     // The states are: 
     // (1) null, (2) "client error", (3) "backend error", (4) "loading", (5) "success"
 
-    var [formState, setFormState] = useState(null);//for conditional rendering
+    var [formState, setFormState] = useState(null);
     var [errorsState, setErrorsState] = useState([]);
     var { loggedIn, updateUser } = useContext(UserContext);
 
@@ -25,12 +24,10 @@ function LoginScreen() {
     // 1. Declare variables (not defined)
     var emailField;
     var passwordField;
-    
 
      
     // Create a JS object like an HTML form element 
     var formData = new FormData();
-
 
     function login() {
 
@@ -82,8 +79,8 @@ function LoginScreen() {
                         console.log('backend response /users/login', jsonResponse)
                         setFormState("success");
 
-                          // Update the user context
-                          updateUser(
+                        // Update the user context
+                        updateUser(
                             {
                                 "email": jsonResponse.message.email,
                                 "firstName": jsonResponse.message.firstName,
@@ -116,79 +113,76 @@ function LoginScreen() {
     if(loggedIn || formState === "success") {
         return (
             <Redirect to="/" />
-        )}
+        )
+    }
+    else {
+        return (
+            <Container maxWidth="sm">
+                <Box pt={8}>
+                    <Typography component="h1" variant="h2">
+                        Login
+                    </Typography>
+                </Box>
 
-        else {
-    return (
-        <Container maxWidth="sm">
-            <Box pt={8}>
-                <Typography component="h1" variant="h2">
-                    Log in
-                </Typography>
-            </Box>
-
-            <Box mt={4} mb={2}>
-
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                    <TextField 
-                    inputRef={ 
-                        function( thisElement ){
-                            emailField = thisElement;
-                        } 
-                    }
-                    label="Email" required={true}/>
-                </FormControl>
-
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                    <TextField 
-                    inputRef={ 
-                        function( thisElement ){
-                            passwordField = thisElement;
-                        } 
-                    }
-                    label="Password" required={true} />
-                </FormControl>
-            </Box>
-
-            
-            <Box display="flex">
-                
-                {
-                    formState !== "loading" &&
-                    <Button onClick={login} size="large" variant="contained">Submit</Button>
-                }
-                
-                {
-                    formState === "loading" &&
-                    <CircularProgress />
-                }
-            </Box>
-
-            <Box mt={2}>
-
-                { 
-                    formState === "client error" &&
-                    <Alert severity="error">
-                        <ul>
-                        {
-                            errorsState.map(addListItem)
+                <Box mt={4} mb={2}>
+                    <FormControl fullWidth sx={{ mb: 2 }}>
+                        <TextField 
+                        inputRef={ 
+                            function( thisElement ){
+                                emailField = thisElement;
+                            } 
                         }
-                        </ul>
-                    </Alert>
-                }
+                        label="Email" required={true}/>
+                    </FormControl>
 
-               
+                    <FormControl fullWidth sx={{ mb: 2 }}>
+                        <TextField 
+                        inputRef={ 
+                            function( thisElement ){
+                                passwordField = thisElement;
+                            } 
+                        }
+                        label="Password" required={true} />
+                    </FormControl>
+                </Box>
 
-                {
-                    formState === "success" &&
-                    <Alert severity="success">
-                        You have logged in successfully!
-                    </Alert>
-                }
-            </Box>
-        </Container>
-    )
+                <Box display="flex">
+                    
+                    {
+                        formState !== "loading" &&
+                        <Button onClick={login} size="large" variant="contained">Submit</Button>
+                    }
+                    
+                    {
+                        formState === "loading" &&
+                        <CircularProgress />
+                    }
+                </Box>
 
-}}
+                <Box mt={2}>
+
+                    { 
+                        formState === "client error" &&
+                        <Alert severity="error">
+                            <ul>
+                            {
+                                errorsState.map(addListItem)
+                            }
+                            </ul>
+                        </Alert>
+                    }
+
+                    {
+                        formState === "success" &&
+                        <Alert severity="success">
+                            You have logged in successfully!
+                        </Alert>
+                    }
+                </Box>
+            </Container>
+        )
+    }
+
+}
 
 export default LoginScreen;

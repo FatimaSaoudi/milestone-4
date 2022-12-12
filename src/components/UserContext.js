@@ -6,6 +6,7 @@ export const UserContext = createContext();
 
 // Declare actions for this component
 const UPDATE_USER = "UPDATE_USER";
+const LOGOUT_USER = "LOGOUT_USER";
 
 // Declare an initial state for the Context component (i.e, the global state)
 const initialState = {
@@ -23,6 +24,12 @@ const reducer = (state=false, action) => {
     if(action.type === UPDATE_USER) {
         return {
             ...state,
+            ...action.payload
+        }
+    }
+
+    if(action.type === LOGOUT_USER) {
+        return {
             ...action.payload
         }
     }
@@ -54,6 +61,27 @@ export const UserContextProvider = ({ children }) => {
         }, [dispatch]
     );
 
+    const logoutUser = useCallback(
+        (payload) => {
+
+            // Set the values in the user's computer
+            localStorage.setItem('firstName', null);
+            localStorage.setItem('lastName', null);
+            localStorage.setItem('email', null);
+            localStorage.setItem('avatar', null);
+            localStorage.setItem('jsonwebtoken', null);
+
+            localStorage.clear();
+
+            dispatch(
+                {
+                    type: LOGOUT_USER,
+                    payload: payload
+                }
+            )
+        }, [dispatch]
+    );
+
     return (
         <UserContext.Provider 
             value={{
@@ -63,7 +91,8 @@ export const UserContextProvider = ({ children }) => {
                 loggedIn: state.loggedIn,
                 avatar: state.avatar,
                 email: state.email,
-                updateUser
+                updateUser,
+                logoutUser
             }}
         >{children}
         </UserContext.Provider>

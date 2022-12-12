@@ -7,11 +7,11 @@ import Contact from "./Contact";
 function HomeScreen() {
   return (
     <div>
-        <div className="container">
+        <div>
           <Hero/>
-          <Campaign/>
           <Services/>
           <WhyUs/>
+          <Campaign/>
           <Contact/>
 
         </div>

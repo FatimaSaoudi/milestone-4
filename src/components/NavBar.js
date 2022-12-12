@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from "react";
+import { UserContext } from './UserContext';
 
 const pages = [
 
@@ -31,11 +32,12 @@ const pagesPaths = [
   "/register",
   "/login",
 ]; //to add button paths
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Dashboard"];
 
 function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const { loggedIn, logoutUser } = React.useContext(UserContext)
   
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -170,6 +172,19 @@ function NavBar() {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                {
+                loggedIn ? 
+                  <MenuItem onClick={logoutUser}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem> :
+                  <MenuItem
+                  to={'/register'}
+                  component={ReactLink}
+                  onClick={handleCloseUserMenu}
+                  >
+                    <Typography textAlign="center">Register</Typography>
+                  </MenuItem>
+              }
               </Menu>
             </Box>
           </Toolbar>
